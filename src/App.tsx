@@ -1,9 +1,11 @@
 import "./App.css";
 import {
   CountryImgPill,
+  MainSectionHeader,
   SearchBar,
   WeatherAnimation,
   WeatherBrief,
+  WeatherCard,
   WeatherDetails,
 } from "./components";
 
@@ -25,7 +27,18 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="md:flex-[2.8] bg-white">b</div>
+      <div className="md:flex-[2.8] bg-lightGrey  flex flex-col py-8 px-8">
+        <MainSectionHeader />
+        <div className="flex gap-1 justify-between mt-10">
+          <WeatherCard day="sunday" condition="a" max={40} min={20} />
+          <WeatherCard day="sunday" condition="a" max={40} min={20} />
+          <WeatherCard day="sunday" condition="a" max={40} min={20} />
+          <WeatherCard day="sunday" condition="a" max={40} min={20} />
+          <WeatherCard day="sunday" condition="a" max={40} min={20} />
+          <WeatherCard day="sunday" condition="a" max={40} min={20} />
+          <WeatherCard day="sunday" condition="a" max={40} min={20} />
+        </div>
+      </div>
     </div>
   );
 }

@@ -7,7 +7,11 @@ export default {
         lightGrey: "#f6f6f8",
         black: "#090909",
         textGrey: "#bababa",
+        darkerTextGrey: "#c5c5c5",
       },
+    },
+    animation: {
+      "spin-slow": "spin 10s linear infinite",
     },
   },
   plugins: [],
