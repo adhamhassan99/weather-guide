@@ -10,7 +10,7 @@ type Props = {
 
 const WeatherCard = (props: Props) => {
   return (
-    <div className="shadow-md flex flex-col items-center bg-white w-fit px-3 py-2 rounded-xl space-y-3">
+    <div className="transition-transform hover:translate-x-1 hover:-translate-y-1 shadow-md flex flex-col items-center bg-white w-fit px-3 py-2 rounded-xl space-y-3">
       <span className="capitalize text-sm">{props.day.substring(0, 3)}</span>
       <span className="animate-spin-slow">
         <IoIosSunny className="text-[#ffaa00] scale-[1.9]" />

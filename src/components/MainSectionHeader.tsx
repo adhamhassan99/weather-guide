@@ -1,16 +1,21 @@
 import { useState } from "react";
-import { TempUnit } from ".";
+import { useTempData } from "../hooks/useTempData";
 
 type linkType = "week" | "today" | "none";
 type tempType = "c" | "f";
 
 const MainSectionHeader = () => {
+  const { setTemp, temp } = useTempData((state) => state);
+
   const [activeLink, setActiveLink] = useState<linkType>("none");
-  const [activeTemp, setActiveTemp] = useState<tempType>("c");
 
   const handleLinkClick = (type: linkType) => {
     if (type === activeLink) setActiveLink("none");
     else setActiveLink(type);
+  };
+
+  const handleTempChange = (newTemp: tempType) => {
+    setTemp(newTemp);
   };
   return (
     <div className="flex justify-between items-center">
@@ -38,18 +43,18 @@ const MainSectionHeader = () => {
       </div>
       <div className="flex space-x-6 items-center">
         <div
-          onClick={() => setActiveTemp("c")}
+          onClick={() => handleTempChange("c")}
           className={`${
-            activeTemp === "c" ? "bg-black text-white" : "bg-white text-black"
+            temp === "c" ? "bg-black text-white" : "bg-white text-black"
           } text-xl  hover:cursor-pointer flex  w-8 h-8 font-semibold justify-center rounded-full`}
         >
           <span className="text-xs">o</span>
           <span className="pt-1 text-lg">C</span>
         </div>
         <div
-          onClick={() => setActiveTemp("f")}
+          onClick={() => handleTempChange("f")}
           className={`${
-            activeTemp === "f" ? "bg-black text-white" : "bg-white text-black"
+            temp === "f" ? "bg-black text-white" : "bg-white text-black"
           } text-xl  hover:cursor-pointer flex w-8 h-8 font-semibold justify-center rounded-full`}
         >
           <span className="text-xs">o</span>

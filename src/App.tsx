@@ -1,8 +1,10 @@
+import { useStore } from "zustand";
 import "./App.css";
 import {
   CountryImgPill,
   MainSectionHeader,
   SearchBar,
+  StatsCard,
   WeatherAnimation,
   WeatherBrief,
   WeatherCard,
@@ -37,6 +39,21 @@ function App() {
           <WeatherCard day="sunday" condition="a" max={40} min={20} />
           <WeatherCard day="sunday" condition="a" max={40} min={20} />
           <WeatherCard day="sunday" condition="a" max={40} min={20} />
+        </div>
+        <div className="mt-8 p-2  flex flex-col flex-1">
+          <h1 className="font-semibold text-2xl mb-4">Today's Highlights</h1>
+          <div className="flex flex-col   space-y-3 flex-1">
+            <div className="flex flex-row space-x-3 flex-1">
+              <StatsCard />
+              <StatsCard />
+              <StatsCard />
+            </div>
+            <div className="flex flex-row space-x-3 flex-1">
+              <StatsCard />
+              <StatsCard />
+              <StatsCard />
+            </div>
+          </div>
         </div>
       </div>
     </div>

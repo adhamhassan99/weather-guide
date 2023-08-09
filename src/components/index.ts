@@ -6,3 +6,4 @@ export { default as WeatherDetails } from "./WeatherDetails";
 export { default as CountryImgPill } from "./CountryImgPill";
 export { default as MainSectionHeader } from "./MainSectionHeader";
 export { default as WeatherCard } from "./WeatherCard";
+export { default as StatsCard } from "./StatsCard";
