@@ -10,8 +10,17 @@ import {
   WeatherCard,
   WeatherDetails,
 } from "./components";
+import { supabase } from "./supabaseClient";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    supabase.auth.signInWithPassword({
+      email: "adham@gmail.com",
+      password: "123",
+    });
+  }, []);
+
   return (
     <div className="h-full flex flex-col md:flex-row  flex-1 ">
       <div className=" md:flex-1.5 flex flex-col px-8 py-8 relative">
