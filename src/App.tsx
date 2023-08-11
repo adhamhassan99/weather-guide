@@ -1,4 +1,3 @@
-import { useStore } from "zustand";
 import "./App.css";
 import {
   CountryImgPill,
@@ -10,16 +9,19 @@ import {
   WeatherCard,
   WeatherDetails,
 } from "./components";
+import React, { useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import { useEffect } from "react";
+import { useCurrentUser } from "./hooks/useCurrentUser";
 
 function App() {
+  const { setUserData } = useCurrentUser();
   useEffect(() => {
-    supabase.auth.signInWithPassword({
-      email: "adham@gmail.com",
-      password: "123",
+    supabase.auth.onAuthStateChange(async (state) => {
+      await supabase.auth
+        .getSession()
+        .then(({ data: { session } }) => setUserData(session));
     });
-  }, []);
+  }, [setUserData]);
 
   return (
     <div className="h-full flex flex-col md:flex-row  flex-1 ">

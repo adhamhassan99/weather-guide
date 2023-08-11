@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useTempData } from "../hooks/useTempData";
+import { useCurrentUser } from "../hooks/useCurrentUser";
+import { supabase } from "../supabaseClient";
 
 type linkType = "week" | "today" | "none";
 type tempType = "c" | "f";
 
 const MainSectionHeader = () => {
   const { setTemp, temp } = useTempData((state) => state);
+  const { userData } = useCurrentUser((state) => state);
 
   const [activeLink, setActiveLink] = useState<linkType>("none");
 
@@ -16,6 +19,16 @@ const MainSectionHeader = () => {
 
   const handleTempChange = (newTemp: tempType) => {
     setTemp(newTemp);
+  };
+
+  const handleAvatarClick = async () => {
+    await supabase.auth.signOut();
+  };
+  const handleLogin = () => {
+    supabase.auth.signInWithPassword({
+      email: "adham.hassan7499@gmail.com",
+      password: "PassPass2023",
+    });
   };
   return (
     <div className="flex justify-between items-center">
@@ -60,13 +73,25 @@ const MainSectionHeader = () => {
           <span className="text-xs">o</span>
           <span className="pt-1 text-lg">F</span>
         </div>
-        <div className="hover:scale-110 transition-transform duration-500 hover:cursor-pointer">
-          <img
-            className="rounded-lg"
-            src="https://i.pravatar.cc/40?img=56"
-            alt=""
-          />
-        </div>
+        {userData ? (
+          <div
+            onClick={handleAvatarClick}
+            className="hover:scale-110 transition-transform duration-500 hover:cursor-pointer"
+          >
+            <img
+              className="rounded-lg"
+              src="https://i.pravatar.cc/40?img=56"
+              alt=""
+            />
+          </div>
+        ) : (
+          <div
+            onClick={handleLogin}
+            className="capitalize hover:cursor-pointer hover:scale-125 transition-transform"
+          >
+            sign in
+          </div>
+        )}
       </div>
     </div>
   );
