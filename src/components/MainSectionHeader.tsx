@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTempData } from "../hooks/useTempData";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 import { supabase } from "../supabaseClient";
+import { useShowModal } from "../hooks/useShowModal";
 
 type linkType = "week" | "today" | "none";
 type tempType = "c" | "f";
@@ -9,6 +10,7 @@ type tempType = "c" | "f";
 const MainSectionHeader = () => {
   const { setTemp, temp } = useTempData((state) => state);
   const { userData } = useCurrentUser((state) => state);
+  const { toggleModal } = useShowModal((state) => state);
 
   const [activeLink, setActiveLink] = useState<linkType>("none");
 
@@ -25,10 +27,11 @@ const MainSectionHeader = () => {
     await supabase.auth.signOut();
   };
   const handleLogin = () => {
-    supabase.auth.signInWithPassword({
-      email: "adham.hassan7499@gmail.com",
-      password: "PassPass2023",
-    });
+    // supabase.auth.signInWithPassword({
+    //   email: "adham.hassan7499@gmail.com",
+    //   password: "PassPass2023",
+    // });
+    toggleModal();
   };
   return (
     <div className="flex justify-between items-center">
@@ -75,12 +78,19 @@ const MainSectionHeader = () => {
         </div>
         {userData ? (
           <div
+            aria-label="logout"
+            title="Logout"
             onClick={handleAvatarClick}
-            className="hover:scale-110 transition-transform duration-500 hover:cursor-pointer"
+            className="w-10 h-10 hover:scale-110 transition-transform duration-500 hover:cursor-pointer"
           >
             <img
               className="rounded-lg"
-              src="https://i.pravatar.cc/40?img=56"
+              src={
+                userData?.user?.user_metadata?.avatar_url ??
+                userData?.user?.identities[0]?.identity_data?.avatar_url ??
+                userData?.user?.identities[1]?.identity_data?.avatar_url ??
+                "https://i.pravatar.cc/40?img=56"
+              }
               alt=""
             />
           </div>

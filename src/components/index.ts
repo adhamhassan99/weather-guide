@@ -7,3 +7,6 @@ export { default as CountryImgPill } from "./CountryImgPill";
 export { default as MainSectionHeader } from "./MainSectionHeader";
 export { default as WeatherCard } from "./WeatherCard";
 export { default as StatsCard } from "./StatsCard";
+export { default as LoginModal } from "./LoginModal";
+export { default as ProviderLoginBtn } from "./ProviderLoginBtn";
+export { default as EmailLogin } from "./EmailLogin";
